@@ -12,4 +12,4 @@ server.key.org
 nginx.conf
 uwsgi.ini
 uwsgi.log
-
+uwsgi.pid
