@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link href="{% static 'passwd/css/code.css' %}" rel="stylesheet"/>
+    <link rel="shortcut icon" href="#"/>
+    <title>password</title>
+</head>
+
+<body >
+    <div>
+        <a href="{% url 'gate:path' %}"><h1>Password</h1></a>
+        {% if message %}
+             <div align="center">{{ message }}</div>
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="inputBox">
+                {{ tempPasswordForm.protect }}
+            </div>
+            <div class="inputBox">
+                {{ tempPasswordForm.app }}
+            </div>
+            <div class="inputBox">
+                {{ tempPasswordForm.length }}
+            </div>
+            <div class="checkBox"><label><input name="check" type="checkbox" value="True">特殊字符</label></div>
+            <button class="btn" type="submit">gen</button>
+        </form>
+    </div>
+    <br/><br/><br/>
+    <div align="center">
+        {% if paswd %}
+            <p>密码：{{ paswd }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

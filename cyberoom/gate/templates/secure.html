@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <style type="text/css">
+        .container .content {
+	        background-image: url({{ theWall }});
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'gate/css/gate.css' %}"/>
+    <link rel="shortcut icon" href="#"/>
+    <title>secure</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content" id="content">
+            <div class="box">
+                <a href="{% url 'gate:bell'%}"><h1>Gate</h1></a>
+                <form action="/check_in/" method="post">
+                    {% if tempSecureForm.captcha.errors %}
+                        <div class="warning">{{ tempSecureForm.captcha.errors }}</div>
+                    {% elif message %}
+                        <div class="warning">{{ message }}</div>
+                    {% endif %}
+                    {% csrf_token %}
+                    <div class="inputBox">
+                        <i class="demo-icon">&#xe801;</i>
+                        {{ tempSecureForm.nameSForm }}
+                    </div>
+                    <div class="inputBox">
+                        <i class="demo-icon">&#xe800;</i>
+                        {{ tempSecureForm.passSForm }}
+                    </div>
+                    <div class="inputBox">
+                        <i class="demo-icon">&#xe803;</i>
+                        {{ tempSecureForm.checkSForm }}
+                    </div>
+                    <div class="inputBox">
+                        <i class="demo-icon">&#xe802;</i>
+                        {{ tempSecureForm.captcha }}
+                    </div>
+                    <button class="btn" type="submit">yes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            var width, height, largeHeader;
+            width = window.innerWidth;
+            height = window.innerHeight;
+            content = document.getElementById('content');
+            content.style.height = height+'px';
+        })();
+    </script>
+</body>
+</html>

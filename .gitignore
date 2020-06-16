@@ -1,0 +1,15 @@
+venv
+.idea
+*/__pycache__
+settings.py
+/cyberoom/cyberoom/urls.py
+admin
+django_extensions
+server.crt
+server.key
+server.csr
+server.key.org
+nginx.conf
+uwsgi.ini
+uwsgi.log
+

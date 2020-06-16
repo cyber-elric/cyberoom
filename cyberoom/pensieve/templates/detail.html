@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>pensieve</title>
+    {% load static %}
+	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'pensieve/css/animate.css' %}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'pensieve/css/icomoon.css' %}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'pensieve/css/bootstrap.css' %}">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{% static 'pensieve/css/style.css' %}">
+	<!-- Modernizr JS -->
+	<script src="{% static 'pensieve/js/modernizr-2.6.2.min.js' %}"></script>
+</head>
+
+<body class="single">
+	<div class="fh5co-loader"></div>
+
+	<div id="page">
+		<div id="fh5co-aside" style="background-image: url({% static '../avalon/thewall.jpg' %})" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<nav role="navigation">
+				<ul>
+					<li><a href="{% url 'pensieve:list' %}"><i class="icon-home"></i></a></li>
+				</ul>
+			</nav>
+			<div class="page-title">
+<!--				<img src="{% static '' %}" alt="标题">-->
+				<h2>{{ pensieve.title }}</h2>
+                <span>{{ pensieve.upDate }}</span>
+			</div>
+		</div>
+
+		<div id="fh5co-main-content">
+			<div class="fh5co-post">
+				<div class="fh5co-entry padding">
+					<div>
+						<pre>{{ pensieve.content }}</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="fh5co-navigation">
+		<div class="fh5co-cover prev fh5co-cover-sm" style="background-image: url({% static 'pensieve/img/project-1.jpg' %})">
+			<div class="overlay"></div>
+			<a class="copy" href="{% url 'pensieve:update' pensieve.id %}">
+				<div class="display-t">
+					<div class="display-tc">
+                        <div>
+                            <h2>改</h2>
+                        </div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="fh5co-cover next fh5co-cover-sm" style="background-image: url({% static 'pensieve/img/project-1.jpg' %})">
+			<div class="overlay"></div>
+			<a class="copy" href="{% url 'pensieve:delete' pensieve.id %}">
+				<div class="display-t">
+					<div class="display-tc">
+                        <div>
+                            <h2>删</h2>
+                        </div>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+
+    <!-- jQuery -->
+	<script src="{% static 'pensieve/js/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'pensieve/js/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'pensieve/js/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'pensieve/js/jquery.waypoints.min.js' %}"></script>
+	<!-- Stellar Parallax -->
+	<script src="{% static 'pensieve/js/jquery.stellar.min.js' %}"></script>
+	<!-- Main -->
+	<script src="{% static 'pensieve/js/main.js' %}"></script>
+</body>
+
+</html>

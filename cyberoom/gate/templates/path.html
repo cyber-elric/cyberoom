@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+<!--    <link href="{% static 'css/.css' %}" rel="stylesheet"/>-->
+    <link rel="shortcut icon" href="#"/>
+    <title>index</title>
+</head>
+
+<body>
+    <a href="{% url 'gate:gone' %}">离</a>
+    <div align="center">
+        <a href="{% url 'passwords:passwd' %}">
+            <img src="{% static 'gate/img/404.gif' %}">
+        </a>
+        <a href="{% url 'pensieve:list' %}">
+            <img src="{% static 'gate/img/pensieve.gif' %}">
+        </a>
+    </div>
+</body>
+</html>
