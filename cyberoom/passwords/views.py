@@ -6,7 +6,9 @@ import hashlib
 import base64
 import string
 import random
-import pyperclip
+# import clipboard
+# import pyperclip
+# import PyQt5
 
 
 # 生成密码
@@ -43,7 +45,9 @@ def gen_password(request):
             else:
                 tempString = base64.b85encode(mixHash.encode('utf8')).decode('utf8')
                 passwd = my_base64_encode(tempString)[6: length + 6]
-            pyperclip.copy(passwd)
+            # clipboard.copy(passwd)
+            # pyperclip.copy(passwd)
+           
             return render(request, 'passwd.html', locals())
 
         else:  # 随机模式
@@ -63,7 +67,8 @@ def gen_password(request):
             passwd = ''
             for i in range(length):
                 passwd += random.choice(passwdRange)
-            pyperclip.copy(passwd)
+            # clipboard.copy(passwd)
+            # pyperclip.copy(passwd)
             return render(request, 'passwd.html', locals())
 
     tempPasswordForm = forms.PasswordForm()
