@@ -31,6 +31,7 @@ def get_the_wallpaper():
 
 # 登录
 def step_in(request):
+    # 检查登陆状态
     if request.session.get('checked_in', None):
         return redirect('/path/')
 

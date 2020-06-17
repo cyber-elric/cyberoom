@@ -5,7 +5,7 @@ from captcha.fields import CaptchaField
 
 
 class GateForm(forms.Form):
-    nameGForm = forms.CharField(label='', max_length=36, widget=forms.TextInput(attrs={
+    nameGForm = forms.CharField(label='', max_length=60, widget=forms.TextInput(attrs={
         'class': 'textBox',
         'placeholder': '君名',
         'autofocus': '',
@@ -17,7 +17,7 @@ class GateForm(forms.Form):
 
 
 class SecureForm(forms.Form):
-    nameSForm = forms.CharField(label='', max_length=36, widget=forms.TextInput(attrs={
+    nameSForm = forms.CharField(label='', max_length=60, widget=forms.TextInput(attrs={
         'class': 'textBox',
         'placeholder': '君名',
         'autofocus': '',

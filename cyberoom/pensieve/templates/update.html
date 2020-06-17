@@ -8,10 +8,12 @@
 </head>
 
 <body>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="OK">
-    </form>
+    <div align="center">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="OK">
+        </form>
+    </div>
 </body>
 </html>

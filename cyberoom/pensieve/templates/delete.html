@@ -8,10 +8,12 @@
 </head>
 <body>
     <a href="{% url 'pensieve:list' %}">退</a>
-    <form method="post">
-        {% csrf_token %}
-        {{ object }}
-        <input type="submit" value="Confirm">
-    </form>
+    <div align="center">
+        <form method="post">
+            {% csrf_token %}
+            {{ object }}
+            <input type="submit" value="Confirm">
+        </form>
+    </div>
 </body>
 </html>
