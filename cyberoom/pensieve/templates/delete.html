@@ -11,7 +11,8 @@
     <div align="center">
         <form method="post">
             {% csrf_token %}
-            {{ object }}
+            <p>确定要删除{{ object }}吗？</p>
+            <br/>
             <input type="submit" value="Confirm">
         </form>
     </div>
