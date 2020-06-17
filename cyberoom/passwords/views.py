@@ -39,11 +39,11 @@ def gen_password(request):
             mixHash = hashlib.sha3_256((appHash + idHash).encode('utf8')).hexdigest()[1:60]
             if check:
                 tempString = my_base64_encode(mixHash)
-                paswd = base64.b85encode(tempString.encode('utf8')).decode('utf8')[6: length + 6]
+                passwd = base64.b85encode(tempString.encode('utf8')).decode('utf8')[6: length + 6]
             else:
                 tempString = base64.b85encode(mixHash.encode('utf8')).decode('utf8')
-                paswd = my_base64_encode(tempString)[6: length + 6]
-            pyperclip.copy(paswd)
+                passwd = my_base64_encode(tempString)[6: length + 6]
+            pyperclip.copy(passwd)
             return render(request, 'passwd.html', locals())
 
         else:  # 随机模式
@@ -57,13 +57,13 @@ def gen_password(request):
                 message = '长度只认阿拉伯数字'
                 return render(request, 'passwd.html', locals())
             if check:
-                paswdRange = string.punctuation + string.digits + string.ascii_letters
+                passwdRange = string.punctuation + string.digits + string.ascii_letters
             else:
-                paswdRange = string.digits + string.ascii_letters
-            paswd = ''
+                passwdRange = string.digits + string.ascii_letters
+            passwd = ''
             for i in range(length):
-                paswd += random.choice(paswdRange)
-            pyperclip.copy(paswd)
+                passwd += random.choice(passwdRange)
+            pyperclip.copy(passwd)
             return render(request, 'passwd.html', locals())
 
     tempPasswordForm = forms.PasswordForm()

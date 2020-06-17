@@ -15,7 +15,7 @@
         {% if message %}
              <div align="center">{{ message }}</div>
         {% endif %}
-        <form action="" method="post">
+        <form method="post">
             {% csrf_token %}
             <div class="inputBox">
                 {{ tempPasswordForm.protect }}
@@ -27,13 +27,13 @@
                 {{ tempPasswordForm.length }}
             </div>
             <div class="checkBox"><label><input name="check" type="checkbox" value="True">特殊字符</label></div>
-            <button class="btn" type="submit">gen</button>
+            <input class="btn" type="submit">gen</input>
         </form>
     </div>
     <br/><br/><br/>
     <div align="center">
-        {% if paswd %}
-            <p>密码：{{ paswd }}</p>
+        {% if passwd %}
+            <p>密码：{{ passwd }}</p>
         {% endif %}
     </div>
 </body>

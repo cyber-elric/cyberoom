@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views import generic
 from . import forms, models
 from django.urls import reverse_lazy
