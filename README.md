@@ -13,7 +13,7 @@
 3. **创建系统新用户**
 
 	adduser username
-	# 再输入密码
+	再输入密码
 
 4. **下载python3，安装pip**
 
