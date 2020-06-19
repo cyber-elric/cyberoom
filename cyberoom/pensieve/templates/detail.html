@@ -37,7 +37,7 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<div id="fh5co-aside" style="background-image: url({% static '../avalon/thewall.jpg' %})" data-stellar-background-ratio="0.5">
+		<div id="fh5co-aside" style="background-image: url({% static 'pensieve/img/star-d.jpg' %})" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<nav role="navigation">
 				<ul>
@@ -63,8 +63,7 @@
 	</div>
 
 	<div class="fh5co-navigation">
-		<div class="fh5co-cover prev fh5co-cover-sm" style="background-image: url({% static 'pensieve/img/project-1.jpg' %})">
-			<div class="overlay"></div>
+		<div class="fh5co-cover prev fh5co-cover-sm">
 			<a class="copy" href="{% url 'pensieve:update' pensieve.id %}">
 				<div class="display-t">
 					<div class="display-tc">
@@ -75,8 +74,7 @@
 				</div>
 			</a>
 		</div>
-		<div class="fh5co-cover next fh5co-cover-sm" style="background-image: url({% static 'pensieve/img/project-1.jpg' %})">
-			<div class="overlay"></div>
+		<div class="fh5co-cover next fh5co-cover-sm">
 			<a class="copy" href="{% url 'pensieve:delete' pensieve.id %}">
 				<div class="display-t">
 					<div class="display-tc">

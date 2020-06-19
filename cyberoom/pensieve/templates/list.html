@@ -37,7 +37,7 @@
     <div class="fh5co-loader"></div>
 
     <div id="page">
-		<div id="fh5co-aside" style="background-image: url({% static 'pensieve/img/image_1.jpg' %})">
+		<div id="fh5co-aside" style="background-image: url({% static 'pensieve/img/star-m.jpg' %})">
 			<div class="overlay"></div>
             <nav role="navigation">
 				<ul>
@@ -53,7 +53,7 @@
                 {% if pensieveList %}
                     {% for p in pensieveList %}
                         <div class="fh5co-entry padding">
-                            <img src="{% static 'pensieve/img/project-1.jpg' %} " alt="图">
+                            <img src="{% static 'pensieve/img/samsie.jpg' %} " alt="图">
                             <div>
 								<a href="{% url 'pensieve:detail' p.id %}">
 									<span class="fh5co-post-date">{{ p.upDate }}</span>
