@@ -30,3 +30,7 @@ urlpatterns = [
     # url(r'^static/(?P<path>.*)$', static.serve,
     #     {'document_root': settings.STATIC_ROOT}, name='static')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'gate.views.page_not_found'
+handler500 = 'gate.views.page_error'
+
