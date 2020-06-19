@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
+    <title>404</title>
+</head>
+
+<body>
+    <div align="center">
+        <a href="{% url 'pensieve:list' %}"><p>退</p></a>
+        <h1 align="center" style="font-size: 66px">404</h1>
+        <img src="{% static '404.gif' %}"/>
+    </div>
+</body>
+</html>

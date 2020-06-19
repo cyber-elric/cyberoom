@@ -50,12 +50,12 @@ def step_in(request):
                 return redirect('/path/')
             else:
                 message = 'stay away from here'
-                return render(request, 'gate.html', locals())
+                return render(request, 'gate/gate.html', locals())
         else:
-            return render(request, 'gate.html', locals())
+            return render(request, 'gate/gate.html', locals())
 
     tempGateForm = forms.GateForm()
-    return render(request, 'gate.html', locals())
+    return render(request, 'gate/gate.html', locals())
 
 
 # 注册
@@ -76,10 +76,10 @@ def check_in(request):
             harmlessnessDeclaration = ['黑域', '光墓', '慢雾', '无故事王国', '低光速黑洞']
             if room:
                 message = 'gone boy'
-                return render(request, 'secure.html', locals())
+                return render(request, 'gate/secure.html', locals())
             elif checkSText not in harmlessnessDeclaration:
                 message = 'The Three-Body Problem'
-                return render(request, 'secure.html', locals())
+                return render(request, 'gate/secure.html', locals())
             else:
                 newGuest = models.TheKey()
                 theKey = get_password(nameSText, passSText)
@@ -88,10 +88,10 @@ def check_in(request):
                 newGuest.save()
                 return redirect('/')
         else:
-            return render(request, 'secure.html', locals())
+            return render(request, 'gate/secure.html', locals())
 
     tempSecureForm = forms.SecureForm()
-    return render(request, 'secure.html', locals())
+    return render(request, 'gate/secure.html', locals())
 
 
 # 索引界面
@@ -99,7 +99,7 @@ def the_path(request):
     if not request.session.get('checked_in', None):
         return redirect('/')
 
-    return render(request, 'path.html')
+    return render(request, 'gate/path.html')
 
 
 # 登出
@@ -109,3 +109,11 @@ def see_you(request):
 
     request.session.flush()
     return redirect('/')
+
+
+def page_not_found(request, exception):
+    return render(request, '404.html')
+
+
+def page_error(request):
+    return render(request, '404.html')
