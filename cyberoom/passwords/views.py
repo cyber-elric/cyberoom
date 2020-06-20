@@ -12,7 +12,7 @@ import random
 # 生成密码
 def gen_password(request):
     if not request.session.get('checked_in', None):
-        return redirect('/')
+        return redirect('/gate/')
 
     if request.method == 'POST':
         tempPasswordForm = forms.PasswordForm(request.POST)

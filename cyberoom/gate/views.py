@@ -86,7 +86,7 @@ def check_in(request):
                 newGuest.owner = nameSText
                 newGuest.shape = theKey
                 newGuest.save()
-                return redirect('gate/')
+                return redirect('/gate/')
         else:
             return render(request, 'gate/secure.html', locals())
 
@@ -97,7 +97,7 @@ def check_in(request):
 # 索引界面
 def the_path(request):
     if not request.session.get('checked_in', None):
-        return redirect('gate/')
+        return redirect('/gate/')
 
     return render(request, 'gate/path.html')
 
@@ -105,10 +105,10 @@ def the_path(request):
 # 登出
 def see_you(request):
     if not request.session.get('checked_in', None):
-        return redirect('gate/')
+        return redirect('/gate/')
 
     request.session.flush()
-    return redirect('gate/')
+    return redirect('/gate/')
 
 
 def page_not_found(request, exception):
