@@ -18,7 +18,7 @@
     <div class="container">
         <div class="content" id="content">
             <div class="box">
-                <a href="{% url 'gate:bell'%}"><h1>Gate</h1></a>
+                <a href="{% url 'gate:gate'%}"><h1>Gate</h1></a>
                 <form action="/check_in/" method="post">
                     {% if tempSecureForm.captcha.errors %}
                         <div class="warning">{{ tempSecureForm.captcha.errors }}</div>

@@ -33,7 +33,7 @@ def get_the_wallpaper():
 def step_in(request):
     # 检查登陆状态
     if request.session.get('checked_in', None):
-        return redirect('/path/')
+        return redirect('/')
 
     theWall = get_the_wallpaper()
 
@@ -47,7 +47,7 @@ def step_in(request):
             unlock = models.TheKey.objects.filter(shape=genKey)
             if unlock:
                 request.session['checked_in'] = True
-                return redirect('/path/')
+                return redirect('/')
             else:
                 message = 'stay away from here'
                 return render(request, 'gate/gate.html', locals())
@@ -61,7 +61,7 @@ def step_in(request):
 # 注册
 def check_in(request):
     if request.session.get('checked_in', None):
-        return redirect('/path/')
+        return redirect('/')
 
     theWall = get_the_wallpaper()
 
@@ -86,7 +86,7 @@ def check_in(request):
                 newGuest.owner = nameSText
                 newGuest.shape = theKey
                 newGuest.save()
-                return redirect('/')
+                return redirect('gate/')
         else:
             return render(request, 'gate/secure.html', locals())
 
@@ -97,7 +97,7 @@ def check_in(request):
 # 索引界面
 def the_path(request):
     if not request.session.get('checked_in', None):
-        return redirect('/')
+        return redirect('gate/')
 
     return render(request, 'gate/path.html')
 
@@ -105,10 +105,10 @@ def the_path(request):
 # 登出
 def see_you(request):
     if not request.session.get('checked_in', None):
-        return redirect('/')
+        return redirect('gate/')
 
     request.session.flush()
-    return redirect('/')
+    return redirect('gate/')
 
 
 def page_not_found(request, exception):
