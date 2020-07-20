@@ -16,7 +16,6 @@ public==2019.4.13
 pycparser==2.20
 PyMySQL==0.9.3
 pyOpenSSL==19.1.0
-pyperclip==1.8.0
 pytz==2020.1
 query-string==2019.4.13
 requests==2.23.0

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import pymysql
-import django.core
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,8 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = django.core.management.utils.get_random_secret_key()
-# SECRET_KEY = ''
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -127,6 +126,6 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 
-MEDIA_URL = '/avalon/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'avalon/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 

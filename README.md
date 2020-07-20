@@ -57,7 +57,7 @@ vim ~/.pip/pip.conf
 # 文件内容
 [global]
 index-url = https://mirrors.aliyun.com/pypi/simple/
-# 下面的不知有什么用
+# 下面的不知有没有作用
 # [install]
 # trusted-host = mirrors.aliyun.com
 ```
@@ -71,7 +71,7 @@ notepad C:\Users\yourName\pip\pip.ini
 # 文件内容
 [global]
 index-url = https://mirrors.aliyun.com/pypi/simple/
-# 下面的不知有什么用
+# 下面的不知有没有作用
 # [install]
 # trusted-host = mirrors.aliyun.com
 ```
@@ -141,11 +141,13 @@ SECRET_KEY = ''
 ```
 DEBUG = False
 ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['EXAMPLE.COM']  # ???
 ```
 - MySQL连接，不明文保存密码
 
 ```
 import pymysql
+
 pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
@@ -170,6 +172,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 # urls.py
+
+from django.conf.urls.static import static
+from django.conf import settings
+# from django.conf.urls import url
+# from django.views import static
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # url(r'^static/(?P<path>.*)$', static.serve,
@@ -346,8 +355,8 @@ socket = /path/to/your/site.sock
 chmod-socket = 664
 
 # be the same as nginx's
-# uid = 
-# gid = 
+# uid = www-data
+# gid = www-data
 
 # the virtualenv (full path)
 # home = /path/to/virtualenv
@@ -419,13 +428,13 @@ server {
 	# the port your site will be served on
 	listen		443 ssl;
 	# listen      443;
-	
-	# the domain name it will serve for
-	#server_name .example.com; # substitute your machine's IP address or FQDN
 		
 	# ssl on;
 	ssl_certificate /path/to/your/project/server.crt;
 	ssl_certificate_key /path/to/your/project/server.key;
+	
+	# the domain name it will serve for
+	#server_name .example.com; # substitute your machine's IP address or FQDN
 	
 	charset     utf-8;
 
@@ -453,6 +462,15 @@ server {
 
 ```
 sudo ln -s /path/to/your/site/yoursite_nginx.conf /etc/nginx/sites-enabled/
+```
+
+*如果没有启用uwsgi.ini中的uid和gid，就要修改nginx的配置
+
+```
+sudo vim /etc/nginx/nginx.conf
+
+user yourUserName;
+# user www-data;
 ```
 
 *控制nginx
@@ -505,71 +523,13 @@ sudo systemctl start | stop | restart nginx
 
 
 
-**pyperclip**
-
-passwords页面自动复制生成的密码到粘贴板功能，默认不启动
-
-启用
-
-```
-# 将下面的语句的注释去掉 cyberoom/cyberoom/passwords/views.py
-
-import pyperclip
-pyperclip.copy(passwd)  # 两处
-```
-
-如果启用了pyperclip，需要安装xsel或xclip
-
-```
-sudo apt install xclip
-sudo apt install xsel
-```
-
-在云服务器上尝试，未成功
-
-pyperclip need a copy/paste machinsm
-
-apt install了xsel和xclip，pip install了PyQt5都没用。
-
 
 
 
 
 # Error
 
-1. WSL2 Ubuntu20.04
-
-```
-# /var/log/nginx/error.log
-
-connect() to unix:///home/cybura/cyberoom/cyberoom/cyberoom.sock failed (13: Permission denied) while connecting to upstream
-```
-
-nginx和uwsgi的user要保持一致：
-
-解决方法：
-
-1. 使用nginx的默认，在uwsgi.ini中增加
-
-```
-# uwsgi.ini
-
-uid = www-data
-gid = www-data
-```
-
-2. 使用默认系统用户，与uwsgi的用户一样,那就修改nginx的配置
-
-```
-# /etc/nginx/nginx.conf
-
-user userName;
-# user www-data;
-```
-
-
-
-2. uwsgi命令行启动项目时，识别不出‘--module'选项
+1. uwsgi命令行启动项目时，识别不出‘--module'选项
 
 解决方法：
 

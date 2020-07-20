@@ -16,3 +16,4 @@ uwsgi.log
 uwsgi.pid
 uwsgi_params
 hosts.py
+cyberoom.sock

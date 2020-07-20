@@ -7,7 +7,7 @@
     <link href="{% static 'passwd/css/code.css' %}" rel="stylesheet"/>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <title>password</title>
-</head>
+<head>
 
 <body >
     <div>
@@ -15,6 +15,7 @@
         {% if message %}
              <div align="center">{{ message }}</div>
         {% endif %}
+
         <form method="post">
             {% csrf_token %}
             <div class="inputBox">
@@ -27,14 +28,24 @@
                 {{ tempPasswordForm.length }}
             </div>
             <div class="checkBox"><label><input name="check" type="checkbox" value="True">特殊字符</label></div>
-            <input class="btn" type="submit" value='gen'>
+            <input class="btn1" type="submit" value='现'>
         </form>
     </div>
     <br/><br/><br/>
     <div align="center">
         {% if passwd %}
-            <p>密码：{{ passwd }}</p>
+            <br/>
+            <input id='cp' type="text" value="{{ passwd }}">
+            <br/>
+            <button class="btn2" onclick="clip()">抄</button>
         {% endif %}
     </div>
+    <script>
+        function clip() {
+            var i = document.getElementById('cp');
+            i.select();
+            document.execCommand('copy');
+        }
+    </script>
 </body>
 </html>
