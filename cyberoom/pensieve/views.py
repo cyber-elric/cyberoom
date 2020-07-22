@@ -63,7 +63,8 @@ class PensieveDelete(generic.DeleteView):
 
 class PensieveUpdate(generic.UpdateView):
     model = models.Pensieve
-    fields = '__all__'
+    form_class = forms.PensieveForm
+    # fields = '__all__'
     template_name = 'pensieve/update.html'
 
     def dispatch(self, request, *args, **kwargs):

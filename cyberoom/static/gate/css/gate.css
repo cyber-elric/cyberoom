@@ -94,7 +94,7 @@ a:link, a:visited, a:hover {
 .btn {
     position: absolute;
     left: 40%;
-    background-color:transparent;
+    background-color: transparent;
     width: 56px;
 	height: 56px;
 	border-radius: 50px;

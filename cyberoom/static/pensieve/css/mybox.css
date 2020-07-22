@@ -1,6 +1,6 @@
 
 body {
-    margin-top: 4.8em;
+    margin-top: 1.6em;
     background-color: #ffffff;
 }
 
@@ -20,18 +20,18 @@ h1 {
     font-family: Arial, sans-serif;
 }
 
-.inputBox {
-    width: 300px;
+.titleBox {
+    width: 360px;
 	height: 46px;
 	padding: 0 5px;
 	margin-bottom: 30px;
 	border-radius: 50px;
 	position: relative;
 	top: 50%;
-	left: 38%;
+	left: 37%;
 	border: black 2px solid !important;
 }
-.textBox {
+.titleTextBox {
 	width: 220px;
 	height: 46px;
 	outline: none;
@@ -44,44 +44,36 @@ h1 {
 	line-height: 46px;
 	color: black !important;
 }
-::-webkit-input-placeholder {
-    color: black;
-    opacity: 0.7;
-}
-::-moz-placeholder {
-    color: black;
-    opacity: 0.7;
-}
 
-.checkBox {
-    position: relative;
-    left: 45%;
-    width: 200px;
-    height: 50px;
-}
-
-.btn1 {
-    position: absolute;
-    left: 47%;
-    background-color: transparent;
-    width: 50px;
-	height: 50px;
+.contentBox {
+    width: 720px;
+    height: 360px;
+	padding: 0 5px;
+	margin-bottom: 30px;
 	border-radius: 50px;
+	position: relative;
+	top: 50%;
+	left: 24%;
 	border: black 2px solid !important;
-	color: black;
 }
-
-#cp {
-    position: relative;
-    font-color: black;
-    font-size: 16px;
-    width: 333px;
-    border: None;
-}
-
-.btn2 {
+.contentTextBox {
+	width: 645px;
+	height: 360px;
+	outline: none;
+	display: inline-block;
+	font: 16px "microsoft yahei", Arial,"Microsoft jhengHei";
     position: absolute;
-    left: 47%;
+    left: 2.8em;
+	border: none;
+	background: none;
+	line-height: 46px;
+	color: black !important;
+	resize: none;
+}
+
+.btn {
+    position: absolute;
+    left: 49%;
     background-color: transparent;
     width: 50px;
 	height: 50px;

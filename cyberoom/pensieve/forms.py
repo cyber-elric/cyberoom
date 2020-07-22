@@ -8,3 +8,15 @@ class PensieveForm(forms.ModelForm):
     class Meta:
         model = models.Pensieve
         fields = '__all__'
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'titleTextBox',
+                'placeholder': 'Title',
+                'autofocus': '',
+            }),
+
+            'content': forms.Textarea(attrs={
+                'class': 'contentTextBox',
+                'placeholder': 'Content',
+            }),
+        }

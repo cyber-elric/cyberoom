@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'pensieve/css/mybox.css' %}"/>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <title>Title</title>
 </head>
 <body>
-    <a href="{% url 'pensieve:list' %}">退</a>
-    <div align="center">
+    <div>
+        <a href="{% url 'pensieve:list' %}"><h1>Pensieve</h1></a>
         <form method="post">
             {% csrf_token %}
-            <p>确定要删除{{ object }}吗？</p>
-            <br/>
-            <input type="submit" value="Confirm">
+            <br/><br/><br/><br/>
+            <p align="center" text>确定要删除'{{ object }}'吗？</p>
+            <input class="btn" type="submit" value="删">
         </form>
     </div>
 </body>

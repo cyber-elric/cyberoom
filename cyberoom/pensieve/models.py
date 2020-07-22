@@ -3,6 +3,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 class Pensieve(models.Model):
     title = models.CharField(unique=True, max_length=66)
     content = models.TextField()

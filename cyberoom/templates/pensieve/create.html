@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'pensieve/css/mybox.css' %}"/>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <title>pensieve</title>
 </head>
 
 <body>
-    <a href="{% url 'pensieve:list' %}">退</a>
-    <div align="center">
+    <div>
+        <a href="{% url 'pensieve:list' %}"><h1>Pensieve</h1></a>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="ok">
+            <div class="titleBox">
+                {{ form.title }}
+            </div>
+            <div class="contentBox">
+                {{ form.content }}
+            </div>
+            <input class="btn" type="submit" value="加">
         </form>
     </div>
 </body>
-
 </html>
