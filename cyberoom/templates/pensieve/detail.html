@@ -17,7 +17,7 @@
 	<meta name="twitter:card" content="" />
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	{% load static %}
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <title>pensieve</title>
@@ -32,60 +32,121 @@
 	<link rel="stylesheet" href="{% static 'pensieve/css/style.css' %}">
 	<!-- Modernizr JS -->
 	<script src="{% static 'pensieve/js/modernizr-2.6.2.min.js' %}"></script>
+
+	<!-- Link Swiper's CSS -->
+	<link rel="stylesheet" href="(% static 'swiper-bundle.min.css' %}">
+
+	<!-- Demo styles -->
+	<style>
+		html,
+		body {
+			position: relative;
+			height: 100%;
+		}
+
+		body {
+			background: #eee;
+			font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+			font-size: 14px;
+			color: #000;
+			margin: 0;
+			padding: 0;
+		}
+
+		.swiper-container {
+			width: 100%;
+			height: 100%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	
+		.swiper-slide {
+			text-align: center;
+			font-size: 18px;
+			background: #fff;
+	
+			/* Center slide text vertically */
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+		}
+	</style>
 </head>
 
 <body class="single">
 	<div class="fh5co-loader"></div>
 
-	<div id="page">
-		<div id="fh5co-aside" style="background-image: url({% static 'pensieve/img/star-d.jpg' %})" data-stellar-background-ratio="0.5">
-			<div class="overlay"></div>
-			<nav role="navigation">
-				<ul>
-					<li><a href="{% url 'pensieve:list' %}"><i class="icon-home"></i></a></li>
-				</ul>
-			</nav>
-			<div class="page-title">
-				<h2>{{ pensieve.title }}</h2>
-                <span>{{ pensieve.upDate }}</span>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<div id="page">
+					<div id="fh5co-aside" class="swiper-wrapper" style="background-image: url({% static 'pensieve/img/star-d.jpg' %})" data-stellar-background-ratio="0.5">
+						<div class="overlay"></div>
+						<nav role="navigation">
+							<ul>
+								<li><a href="{% url 'pensieve:list' %}"><i class="icon-home"></i></a></li>
+							</ul>
+						</nav>
+						<div class="page-title">
+							<h2>{{ pensieve.title }}</h2>
+							<span>{{ pensieve.upDate }}</span>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
 
-		<div id="fh5co-main-content">
-			<div class="fh5co-post">
-				<div class="fh5co-entry padding">
-					<div>
-						<pre>{{ pensieve.content }}</pre>
+			<div class="swiper-slide">
+				<div id="page">
+					<div id="fh5co-main-content">
+						<div class="fh5co-post">
+							<div class="fh5co-entry padding">
+								<div>
+									<pre>{{ pensieve.content }}</pre>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="fh5co-navigation">
+					<div class="fh5co-cover prev fh5co-cover-sm">
+						<a class="copy" href="{% url 'pensieve:update' pensieve.id %}">
+							<div class="display-t">
+								<div class="display-tc">
+									<div>
+										<h2>改</h2>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+					
+					<div class="fh5co-cover next fh5co-cover-sm">
+						<a class="copy" href="{% url 'pensieve:delete' pensieve.id %}">
+							<div class="display-t">
+								<div class="display-tc">
+									<div>
+										<h2>删</h2>
+									</div>
+								</div>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="fh5co-navigation">
-		<div class="fh5co-cover prev fh5co-cover-sm">
-			<a class="copy" href="{% url 'pensieve:update' pensieve.id %}">
-				<div class="display-t">
-					<div class="display-tc">
-                        <div>
-                            <h2>改</h2>
-                        </div>
-					</div>
-				</div>
-			</a>
-		</div>
-		<div class="fh5co-cover next fh5co-cover-sm">
-			<a class="copy" href="{% url 'pensieve:delete' pensieve.id %}">
-				<div class="display-t">
-					<div class="display-tc">
-                        <div>
-                            <h2>删</h2>
-                        </div>
-					</div>
-				</div>
-			</a>
-		</div>
-	</div>
+
 
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
@@ -103,6 +164,23 @@
 	<script src="{% static 'pensieve/js/jquery.stellar.min.js' %}"></script>
 	<!-- Main -->
 	<script src="{% static 'pensieve/js/main.js' %}"></script>
+
+	<!-- Swiper JS -->
+	<script src="{% static 'swiper-bundle.min.js' %}"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            direction: 'vertical',
+            slidesPerView: 1,
+            spaceBetween: 30,
+            mousewheel: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
 </body>
 
 </html>

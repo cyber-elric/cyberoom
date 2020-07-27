@@ -2,22 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>index</title>
     {% load static %}
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
-    <title>index</title>
+    
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="{% static 'swiper-bundle.min.css' %}">
+  
+    <!-- Demo styles -->
+    <style>
+      html, body {
+        position: relative;
+        height: 100%;
+      }
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+      }
+      .swiper-container {
+        width: 100%;
+        height: 100%;
+      }
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+  
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        transition: 300ms;
+        transform: scale(0.8);
+      }
+      .swiper-slide-active,.swiper-slide-duplicate-active{
+        transform: scale(1);
+      }
+    </style>
 </head>
 
 <body>
-    <a href="{% url 'gate:gone' %}">离</a>
-    <div align="center">
-        <a href="{% url 'passwords:passwd' %}">
-            <img src="{% static 'gate/img/lock.jpg' %}" height="100px" width="100px">
-        </a>
-        <br/>
-        <a href="{% url 'pensieve:list' %}">
-            <img src="{% static 'gate/img/pensieve.gif' %}">
-        </a>
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <a href="{% url 'gate:gone' %}">
+                    <img src="{% static '/gate/img/gone.jpg' %}" width="100%">
+                </a>
+            </div>
+
+            <div class="swiper-slide">
+                <a href="{% url 'passwords:passwd' %}">
+                    <img src="{% static 'gate/img/formula.jpg' %}" width="100%">
+                </a>
+            </div>
+
+            <div class="swiper-slide">
+                <a href="{% url 'pensieve:list' %}">
+                    <img src="{% static 'gate/img/pensieve.gif' %}" width="100%">
+                </a>
+            </div>
+
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
     </div>
+    
+    <!-- Swiper JS -->
+    <script src="{% static 'swiper-bundle.min.js' %}"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        centeredSlides: true,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        });
+    </script>
 </body>
 </html>
