@@ -295,9 +295,10 @@ h1, h2, h3, h4, h5, h6, figure {
   position: relative;
   z-index: 12;
   display: block;
+  background-color: #f2f2f2;
 }
 .fh5co-navigation .fh5co-cover .copy .display-t, .fh5co-navigation .fh5co-cover .copy .display-tc {
-  height: 400px;
+  height: 60px;
   display: table;
   width: 100%;
 }
@@ -350,7 +351,7 @@ h1, h2, h3, h4, h5, h6, figure {
     width: 100%;
     position: relative;
     z-index: 999;
-    height: 700px;
+    height: 100%;
   }
 }
 #fh5co-aside .overlay {
@@ -451,7 +452,7 @@ footer {
 }
 .single #fh5co-main-content {
   margin-left: 0;
-  max-width: 960px;
+  max-width: 100%;
   margin: 0 auto;
 }
 @media screen and (max-width: 768px) {
