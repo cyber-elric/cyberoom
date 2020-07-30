@@ -151,4 +151,4 @@ def page_error(request):
 #         with open(fileName, 'wb') as f:
 #             f.write(response.content)
 
-#     return '/avalon/bing.jpg'
+#     return "/avalon/bing.jpg"
