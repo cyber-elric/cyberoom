@@ -33,11 +33,11 @@ def get_the_wallpaper():
 
 # 登录
 def step_in(request):
-    # 检查登陆状态
+    # 检查登陆状态，下同
     if request.session.get('checked_in', None):
         return redirect('/')
 
-    theWall = get_the_wallpaper()
+    theWall = get_the_wallpaper()  # 壁纸地址
 
     if request.method == 'POST':
         tempGateForm = forms.GateForm(request.POST)
@@ -76,8 +76,8 @@ def check_in(request):
             passSText = tempSecureForm.cleaned_data.get('passSForm')
             checkSText = tempSecureForm.cleaned_data.get('checkSForm')
             safeSText = tempSecureForm.cleaned_data.get('safeSForm')
-            room = models.TheKey.objects.filter(owner=nameSText)
             harmlessnessDeclaration = ['黑域', '光墓', '慢雾', '无故事王国', '低光速黑洞']
+            room = models.TheKey.objects.filter(owner=nameSText)  # 检查用户名是否已被注册
             if room:
                 message = 'you are late'
                 return render(request, 'gate/secure.html', locals())

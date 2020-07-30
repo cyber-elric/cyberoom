@@ -4,6 +4,7 @@ from django import forms
 from captcha.fields import CaptchaField
 
 
+# 登录界面表单
 class GateForm(forms.Form):
     nameGForm = forms.CharField(label='', max_length=60, widget=forms.TextInput(attrs={
         'class': 'textBox',
@@ -16,6 +17,7 @@ class GateForm(forms.Form):
     }))
 
 
+# 注册界面表单
 class SecureForm(forms.Form):
     nameSForm = forms.CharField(label='', max_length=60, widget=forms.TextInput(attrs={
         'class': 'textBox',

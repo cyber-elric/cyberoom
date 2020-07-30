@@ -6,11 +6,13 @@ from . import forms, models
 from django.urls import reverse_lazy, reverse
 
 
+# 
 class PensieveList(generic.ListView):
     # model = models.Pensieve
     template_name = 'pensieve/list.html'
     context_object_name = 'pensieveList'
 
+    # 检查登录状态，未登录则返回登录界面
     def dispatch(self, request, *args, **kwargs):   
         if not request.session.get('checked_in', None):
             return redirect('/gate/')
@@ -22,6 +24,7 @@ class PensieveList(generic.ListView):
 
         return handler(request, *args, **kwargs)
 
+    # 只展示用户自己的pensieve
     def get_queryset(self):
         return models.Pensieve.objects.filter(up=self.request.session.get('up', None))
 
@@ -41,6 +44,7 @@ class PensieveDetail(generic.DetailView):
 
         return handler(request, *args, **kwargs)
 
+    # 用户只能查看自己的pensieve
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
         if obj.up != self.request.session.get('up', None):
@@ -64,10 +68,19 @@ class PensieveCreate(generic.CreateView):
 
         return handler(request, *args, **kwargs)
 
+    # 自动为用户处理pensieve的拥有者
     def get_initial(self):
         initial = super(PensieveCreate, self).get_initial()
         initial['up'] = self.request.session.get('up', None)
         return initial
+
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super(PensieveUpdate, self).get_context_data(**kwargs)
+    #     context['uper'] = forms.PensieveForm(initial={
+    #         'up': self.request.session.get('up', None),
+    #     })
+    #     return context
 
 
 class PensieveUpdate(generic.UpdateView):

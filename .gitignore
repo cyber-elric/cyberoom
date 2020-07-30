@@ -1,6 +1,6 @@
 venv
 .idea
-*/__pycache__
+/cyberoom/*/__pycache__
 settings.py
 /cyberoom/cyberoom/urls.py
 admin
