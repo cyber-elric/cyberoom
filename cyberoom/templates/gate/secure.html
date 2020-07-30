@@ -9,7 +9,7 @@
 	        background-image: url({{ theWall }});
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="{% static 'gate/css/gate.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'gate/css/secure.css' %}"/>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <title>secure</title>
 </head>
@@ -35,8 +35,12 @@
                         {{ tempSecureForm.passSForm }}
                     </div>
                     <div class="inputBox">
-                        <i class="demo-icon">&#xe803;</i>
+                        <i class="demo-icon">&#xe800;</i>
                         {{ tempSecureForm.checkSForm }}
+                    </div>
+                    <div class="inputBox">
+                        <i class="demo-icon">&#xe803;</i>
+                        {{ tempSecureForm.safeSForm }}
                     </div>
                     <div class="inputBox">
                         <i class="demo-icon">&#xe802;</i>

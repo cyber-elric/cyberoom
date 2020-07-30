@@ -19,4 +19,8 @@ class PensieveForm(forms.ModelForm):
                 'class': 'contentTextBox',
                 'placeholder': 'Content',
             }),
+
+            'up': forms.TextInput(attrs={
+                'type': 'hidden',
+            }),
         }

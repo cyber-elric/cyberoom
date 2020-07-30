@@ -6,7 +6,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'pensieve/css/mybox.css' %}"/>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
-    <title>pensieve</title>
+    <title>create</title>
 </head>
 
 <body>
@@ -20,8 +20,10 @@
             <div class="contentBox">
                 {{ form.content }}
             </div>
+            {{ form.up }}
             <input class="btn" type="submit" value="加">
         </form>
     </div>
+    
 </body>
 </html>

@@ -1,0 +1,129 @@
+
+body {
+    margin: 0;
+}
+
+.content {
+	position: relative;
+	width: 100%;
+	background: #666;
+	overflow: hidden;
+	background-size: cover;
+	background-position: center center;
+	z-index: 1;
+}
+
+.box {
+	width: 300px;
+	height: 300px;
+	padding: 35px;
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	margin-left: -200px;
+	margin-top: -250px;
+}
+.box h1 {
+	text-align: center;
+	height: 20px;
+	font: 40px "microsoft yahei", Arial,"Microsoft jhengHei";
+	color: rgba(255,255,255, 0.9);
+	line-height: 20px;
+    padding:0 0 35px 0;
+}
+a:link, a:visited, a:hover {
+    text-decoration: none;
+}
+
+.inputBox {
+	height: 46px;
+	padding: 0 5px;
+	margin-bottom: 30px;
+	border-radius: 50px;
+	position: relative;
+	border: rgba(255,255,255, 0.6) 2px solid !important;
+}
+@font-face {
+    font-family: 'fontello';
+    src: url('../fonts/fontello.eot?59462170');
+    src: url('../fonts/fontello.eot?59462170#iefix') format('embedded-opentype'),
+        url('../fonts/fontello.woff?59462170') format('woff'),
+        url('../fonts/fontello.ttf?59462170') format('truetype'),
+        url('../fonts/fontello.svg?59462170#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.demo-icon {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    color: rgba(255,255,255,0.8) !important;
+    font-size: 166%;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    position: absolute;
+    top: .35em;
+    left: .4em;
+    text-align: center;
+    opacity: 0.9;
+    line-height: 1em;
+}
+.textBox {
+	width: 220px;
+	height: 46px;
+	outline: none;
+	display: inline-block;
+	font: 16px "microsoft yahei", Arial,"Microsoft jhengHei";
+    position: absolute;
+    left: 2.8em;
+	border: none;
+	background: none;
+	line-height: 46px;
+	color: rgba(255,255,255,0.9) !important;
+}
+::-webkit-input-placeholder {
+    color: rgba(255,255,255,0.9);
+}
+::-moz-placeholder {
+    color: rgba(255,255,255,0.9);
+    opacity: 1;
+}
+
+
+.btn {
+    position: absolute;
+    left: 40%;
+    background-color: transparent;
+    width: 56px;
+	height: 56px;
+	border-radius: 50px;
+	border: rgba(255,255,255, 0.6) 2px solid !important;
+	color: rgba(255,255,255, 0.6);
+}
+
+
+.warning {
+    text-align: center;
+    color: rgba(255,255,255, 0.9);
+    font-size: 20px;
+}
+
+#id_captcha_1 {
+    width: 220px;
+    height: 46px;
+    outline: none;
+    display: inline-block;
+    font: 14px "microsoft yahei", Arial,"Microsoft jhengHei";
+    margin-left: 50px;
+    border: none;
+    background: none;
+    color: rgba(255,255,255,0.9) !important;
+    line-height: 46px;
+    position: relative;
+}
+.captcha {
+    position: absolute;
+    top: 10%;
+    left: 66%;
+}

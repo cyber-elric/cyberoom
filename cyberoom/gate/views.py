@@ -49,6 +49,7 @@ def step_in(request):
             unlock = models.TheKey.objects.filter(shape=genKey)
             if unlock:
                 request.session['checked_in'] = True
+                request.session['up'] = nameGText
                 return redirect('/')
             else:
                 message = 'stay away from here'
@@ -74,12 +75,15 @@ def check_in(request):
             nameSText = tempSecureForm.cleaned_data.get('nameSForm')
             passSText = tempSecureForm.cleaned_data.get('passSForm')
             checkSText = tempSecureForm.cleaned_data.get('checkSForm')
+            safeSText = tempSecureForm.cleaned_data.get('safeSForm')
             room = models.TheKey.objects.filter(owner=nameSText)
             harmlessnessDeclaration = ['黑域', '光墓', '慢雾', '无故事王国', '低光速黑洞']
             if room:
-                message = 'gone boy'
+                message = 'you are late'
                 return render(request, 'gate/secure.html', locals())
-            elif checkSText not in harmlessnessDeclaration:
+            elif passSText != checkSText:
+                message = '2 passwords not match'
+            elif safeSText not in harmlessnessDeclaration:
                 message = 'The Three-Body Problem'
                 return render(request, 'gate/secure.html', locals())
             else:
