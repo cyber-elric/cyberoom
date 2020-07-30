@@ -5,6 +5,7 @@ settings.py
 /cyberoom/cyberoom/urls.py
 admin
 django_extensions
+import_export
 server.crt
 server.key
 server.csr

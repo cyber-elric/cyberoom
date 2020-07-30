@@ -538,5 +538,13 @@ sudo systemctl start | stop | restart nginx
 然后启动时在’--module'选项前加上'--plugin python3'
 
 
+2. django admin后台页面样式缺失
+
+解决方法：
+
+```
+python manage.py collectstatic
+```
+
 
 
