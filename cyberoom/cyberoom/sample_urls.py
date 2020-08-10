@@ -27,6 +27,7 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path('pensieve/', include('pensieve.urls')),
     path('passwords/', include('passwords.urls')),
+    path('tinymce/', include('tinymce.urls')),
     # url(r'^static/(?P<path>.*)$', static.serve,
     #     {'document_root': settings.STATIC_ROOT}, name='static')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -16,8 +16,7 @@ class PensieveForm(forms.ModelForm):
             }),
 
             'content': forms.Textarea(attrs={
-                'class': 'contentTextBox',
-                'placeholder': 'Content',
+                'id': 'rich_content',
             }),
 
             'up': forms.TextInput(attrs={

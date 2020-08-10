@@ -11,4 +11,5 @@ urlpatterns = [
     path('update/<int:pk>/', views.PensieveUpdate.as_view(), name='update'),
     path('delete/<int:pk>/', views.PensieveDelete.as_view(), name='delete'),
     path('new/', views.PensieveCreate.as_view(), name='create'),
+    path('up/', views.upload_image, name='up'),
 ]

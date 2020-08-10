@@ -1,10 +1,10 @@
 venv
 .idea
 /cyberoom/*/__pycache__
-settings.py
+/cyberoom/cyberoom/settings.py
 /cyberoom/cyberoom/urls.py
-admin
-django_extensions
+/cyberoom/static/admin
+/cyberoom/static/django_extensions
 import_export
 server.crt
 server.key
@@ -19,3 +19,4 @@ uwsgi_params
 hosts.py
 cyberoom.sock
 bing.jpg
+/cyberoom/avalon/tinymce

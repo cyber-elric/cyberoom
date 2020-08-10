@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'captcha',
     'pensieve',
     'passwords',
+    'tinymce',
 ]
 
 # 将captcha验证方式改为简单计算

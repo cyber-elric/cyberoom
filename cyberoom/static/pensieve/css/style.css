@@ -373,6 +373,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  top: 46%;
 }
 #fh5co-aside .featured h2, #fh5co-aside nav h2, #fh5co-aside .page-title h2 {
   color: #fff;

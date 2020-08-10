@@ -2,11 +2,12 @@
 
 from django.db import models
 from django.urls import reverse
-from gate.models import TheKey
+from tinymce.models import HTMLField
+
 
 class Pensieve(models.Model):
     title = models.CharField(unique=True, max_length=66)
-    content = models.TextField()
+    content = HTMLField(blank=True)
     upDate = models.DateTimeField(auto_now_add=True)
     up = models.CharField(max_length=60)
 
