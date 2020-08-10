@@ -59,8 +59,8 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <a href="{% url 'gate:gone' %}">
-                    <img src="{% static '/gate/img/gone.jpg' %}" width="100%">
+                <a href="{% url 'pensieve:list' %}">
+                    <img src="{% static 'gate/img/pensieve.gif' %}" width="100%">
                 </a>
             </div>
 
@@ -69,13 +69,12 @@
                     <img src="{% static 'gate/img/formula.jpg' %}" width="100%">
                 </a>
             </div>
-
+            
             <div class="swiper-slide">
-                <a href="{% url 'pensieve:list' %}">
-                    <img src="{% static 'gate/img/pensieve.gif' %}" width="100%">
+                <a href="{% url 'gate:gone' %}">
+                    <img src="{% static '/gate/img/gone.jpg' %}" width="100%">
                 </a>
             </div>
-
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
