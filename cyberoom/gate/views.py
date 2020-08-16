@@ -6,8 +6,9 @@ import hashlib
 import base64
 import requests
 import json
-import os
-import time
+from os.path import exists
+from os import stat
+from time import strftime, localtime
 
 
 # 生成密钥
@@ -17,18 +18,6 @@ def get_password(id, paswd):
     mixBase = base64.b85encode((paswdBase + idBase).encode()).decode()
     theKey = hashlib.sha3_256(mixBase.encode()).hexdigest()[24:60]
     return theKey
-
-
-# 获取bing每日壁纸
-def get_the_wallpaper():
-    bingURL = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/52.0.2743.116 Edge/15.15063'
-    }
-    wallJson = requests.get(bingURL, headers).text
-    wallURL = json.loads(wallJson)['images'][0]['url']
-    wallFullURL = 'http://cn.bing.com' + wallURL
-    return wallFullURL
 
 
 # 登录
@@ -125,30 +114,37 @@ def page_error(request):
     return render(request, '404.html')
 
 
+# 获取bing每日壁纸
+def get_the_wallpaper():
+    bingURL = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/52.0.2743.116 Edge/15.15063'
+    }
+    try:
+        wallJson = requests.get(bingURL, headers).text
+        wallURL = json.loads(wallJson)['images'][0]['url']
+        wallFullURL = 'http://cn.bing.com' + wallURL
+        return wallFullURL
+    except:
+        pass
+
+
 # 获取bing每日壁纸,下载图片模式
 # def get_the_wallpaper():
 #     fileName = '/home/cybura/cyberoom/cyberoom/avalon/bing.jpg'
-#     if not os.path.exists(fileName):
+#     if not exists(fileName) or strftime("%Y%m%d", localtime(stat(fileName).st_mtime)) != strftime("%Y%m%d", localtime()):
 #         bingURL = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
 #         headers = {
 #             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/52.0.2743.116 Edge/15.15063'
 #         }
-#         wallJson = requests.get(bingURL, headers).text
-#         wallURL = json.loads(wallJson)['images'][0]['url']
-#         wallFullURL = 'http://cn.bing.com' + wallURL
-#         response = requests.get(wallFullURL)
-#         with open(fileName, 'wb') as f:
-#             f.write(response.content)
-#     elif time.strftime("%Y%m%d", time.localtime(os.stat(fileName).st_mtime)) != time.strftime("%Y%m%d", time.localtime()):
-#         bingURL = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
-#         headers = {
-#             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/52.0.2743.116 Edge/15.15063'
-#         }
-#         wallJson = requests.get(bingURL, headers).text
-#         wallURL = json.loads(wallJson)['images'][0]['url']
-#         wallFullURL = 'http://cn.bing.com' + wallURL
-#         response = requests.get(wallFullURL)
-#         with open(fileName, 'wb') as f:
-#             f.write(response.content)
+#         try:
+#             wallJson = requests.get(bingURL, headers).text
+#             wallURL = json.loads(wallJson)['images'][0]['url']
+#             wallFullURL = 'http://cn.bing.com' + wallURL
+#             response = requests.get(wallFullURL)
+#             with open(fileName, 'wb') as f:
+#                 f.write(response.content)
+#         except:
+#             pass
 
 #     return "/avalon/bing.jpg"
