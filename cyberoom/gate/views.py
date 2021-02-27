@@ -115,36 +115,36 @@ def page_error(request):
 
 
 # 获取bing每日壁纸
-def get_the_wallpaper():
-    bingURL = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/52.0.2743.116 Edge/15.15063'
-    }
-    try:
-        wallJson = requests.get(bingURL, headers).text
-        wallURL = json.loads(wallJson)['images'][0]['url']
-        wallFullURL = 'http://cn.bing.com' + wallURL
-        return wallFullURL
-    except:
-        pass
+# def get_the_wallpaper():
+#     bingURL = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
+#     headers = {
+#         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/52.0.2743.116 Edge/15.15063'
+#     }
+#     try:
+#         wallJson = requests.get(bingURL, headers).text
+#         wallURL = json.loads(wallJson)['images'][0]['url']
+#         wallFullURL = 'http://cn.bing.com' + wallURL
+#         return wallFullURL
+#     except:
+#         pass
 
 
 # 获取bing每日壁纸,下载图片模式
-# def get_the_wallpaper():
-#     fileName = '/your/absolute/path/cyberoom/cyberoom/avalon/bing.jpg'
-#     if not exists(fileName) or strftime("%Y%m%d", localtime(stat(fileName).st_mtime)) != strftime("%Y%m%d", localtime()):
-#         bingURL = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
-#         headers = {
-#             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/52.0.2743.116 Edge/15.15063'
-#         }
-#         try:
-#             wallJson = requests.get(bingURL, headers).text
-#             wallURL = json.loads(wallJson)['images'][0]['url']
-#             wallFullURL = 'http://cn.bing.com' + wallURL
-#             response = requests.get(wallFullURL)
-#             with open(fileName, 'wb') as f:
-#                 f.write(response.content)
-#         except:
-#             pass
+def get_the_wallpaper():
+    fileName = '/home/cybura/cyberoom/cyberoom/avalon/bing.jpg'
+    if not exists(fileName) or strftime("%Y%m%d", localtime(stat(fileName).st_mtime)) != strftime("%Y%m%d", localtime()):
+        bingURL = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/52.0.2743.116 Edge/15.15063'
+        }
+        try:
+            wallJson = requests.get(bingURL, headers).text
+            wallURL = json.loads(wallJson)['images'][0]['url']
+            wallFullURL = 'http://cn.bing.com' + wallURL
+            response = requests.get(wallFullURL)
+            with open(fileName, 'wb') as f:
+                f.write(response.content)
+        except:
+            pass
 
-#     return "/avalon/bing.jpg"
+    return "/avalon/bing.jpg"

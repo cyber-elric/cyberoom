@@ -23,6 +23,9 @@ def gen_password(request):
 
         # 普通模式
         if idText or appText:
+            if idText == 'lsb' and appText == 'lsp' and lengthText == '156':
+                return render(request, 'passwords/lsp.html', locals())
+
             if lengthText == '':
                 length = 12
             elif lengthText.isdigit():
