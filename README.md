@@ -1,9 +1,10 @@
 # 部署过程
 
 <h3>Django	uWSGI	Nginx	https	openssl	ubuntu</h2>
+
   
 
-1. **创建系统新用户**
+### 1. 创建系统新用户
 
 ```
 adduser username
@@ -12,7 +13,7 @@ adduser username
 
    
 
-2. **apt换源**
+### 2. apt换源
 
 ```
 sudo mv /etc/apt/sources.list /etc/sources.list.backup
@@ -40,12 +41,13 @@ deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted univer
 
 
 
-3. **python & pip**
+### 3.python & pip 
 
 ```
 sudo apt install python3.x
 sudo apt install python3-pip 
 ```
+
 - pip换源
 
 Linux
@@ -92,7 +94,7 @@ sudo update-alternatives --config pip
 
 
 
-4. **git**
+### 4. git
 
 - 安装
 
@@ -117,185 +119,42 @@ git clone https://gitee.com/you/project.git
 
 
 
-5. **Django**
+### 5. 使用openssl生成https证书
 
-- 更改django的settings.py
+- 安装openssl
 
-```
-cp sample_settings.py settings.py
-cp sample_urls.py urls.py
-```
+  ```
+  sudo apt install openssl
+  ```
 
-- 生成django项目密钥
+- 创建私钥
 
-```
-# 运行python
-from django.core.management import utils
-SECRET_KEY = utils.get_random_secret_key()
+  ```
+  openssl genrsa -des3 -out server.key 2048
+  ```
 
-# 通过此函数得到密钥后，将密钥复制到settings.py中的
-SECRET_KEY = ''
-```
-- 生产环境配置
+- 创建签名请求证书CSR
 
-```
-DEBUG = False
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['EXAMPLE.COM']  # ???
-```
-- MySQL连接，不明文保存密码
+  ```
+  openssl req -new -key server.key -out server.csr
+  ```
 
-```
-import pymysql
+- 在加载SSL支持的Nginx并使用上述私钥时除去必须的口令
 
-pymysql.install_as_MySQLdb()
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS':{
-            'read_default_file': '/etc/mysql/my.cnf'
-        },
-    }
-}
-```
-*my.cnf在下一步
+  ```
+  cp server.key server.key.org
+  openssl rsa -in server.key.org -out server.key
+  ```
 
-- 静态文件
+- 标记证书使用上述私钥和CSR
 
-```
-# settings.py
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-    
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-
-# urls.py
-
-from django.conf.urls.static import static
-from django.conf import settings
-# from django.conf.urls import url
-# from django.views import static
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    # url(r'^static/(?P<path>.*)$', static.serve,
-    #     {'document_root': settings.STATIC_ROOT}, name='static')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-```
-
-- 404 & 500
-
-```
-# urls.py
-
-handler404 = 'gate.views.page_not_found'
-handler500 = 'gate.views.page_error'
-```
+  ```
+  openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+  ```
 
 
 
-6. **MySQL**
-
-- 安装
-
-```
-sudo apt install mysql-server
-```
-
-- 首次登录MySQL，如果安装时没有设置密码，查看 /etc/mysql/debian.cnf，获取password
-
-```
-sudo cat /etc/mysql/debian.cnf
-mysql -u debian-sys-maint -p
-```
-
-- 修改root用户的密码
-
-```
-# 新版
-update mysql.user set authentication_string = 'yourPassword' where user = 'root';  
-# 旧版
-update mysql.user set password=password('yourPassword')  where user='root';
-```
-
-- 创建用户，授权；创建数据库要设置字符集为utf8
-
-```
-CREATE USER 'username'@'host' IDENTIFIED BY 'yourPassword';
-GRANT ALL ON *.* to 'username'@'host';
-CREATE DATABASE databaseName default character set = 'utf8';
-```
-
-- my.cnf
-
-```
-# ...文件原内容
-
-# my.cnf
-
-[client]
-database = databaseName
-user = userName
-password = userPassword
-host = hostName  # 默认localhost可不填
-port = 3306  # 默认3306可不填
-default-character-set = utf8
-
-!include ... # 文件原内容
-!include ... # 文件原内容
-```
-
-```
-# 3个MySQL配置文件
-[client]
-default-character-set=utf8
-
-[mysql]
-default-character-set=utf8
-
-[mysqld]
-character-set-server=utf8
-```
-*mysql字符集命令
-
-```
-show variables like 'char%';  # 当前MYSQL服务器字符集设置
-ALTER DATABASE databaseName DEFAULT CHARACTER SET 'utf8';  #更改
-```
-
-
-
-7. **migrate**
-
-- 将django项目中的数据库设计导入MySQL
-
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-*此时可以测试运行项目，浏览器打开127.0.0.1:8000
-
-```
-python manage.py runserver
-```
-
-*可能会出现MySQL错误
-
-```
-vim /home/userName/.local/lib/python3.x/sites-packages/django/db/backends/mysql/base.py
-
-# 将这两行注释掉
-
-if version < (1, 3, 13):
-    raise ImproperlyConfigured('mysqlclient 1.3.13 or newer is required; you have %s.' % Database.__version__)
-```
-
-
-
-8. **uwsgi**
+### 6. uwsgi
 
 - 安装
 
@@ -308,8 +167,6 @@ sudo apt install uwsgi
 ```
 sudo apt install python3.x-dev
 ```
-
-
 
 测试uwsgi，新建test.py，如下
 
@@ -331,8 +188,6 @@ uwsgi   --http :8001  --plugin python  --wsgi-file test.py
 ```
 uwsgi --http-socket 0.0.0.0:8000 --plugin python3 --module yourSite.wsgi:application
 ```
-
-
 
 - 配置uwsgi，创建uwsgi.ini
 
@@ -391,8 +246,9 @@ max-requests = 666
 # disable-logging = true
 daemonize = /path/to/your/uwsgi.log
 
-# plugin = python38
+# plugin = python3
 ```
+
  通过uwsgi运行项目 
 
 ```
@@ -404,7 +260,7 @@ uwsgi --stop uwsgi.pid  #停止
 
 
 
-9. **Nginx**
+### 7. Nginx
 
 - 安装
 
@@ -488,38 +344,184 @@ sudo systemctl start | stop | restart nginx
 
 
 
-10. **使用openssl生成https证书**
+### 8. MySQL
 
-- 安装openssl
+- 安装
 
-  ```
-  sudo apt install openssl
-  ```
+```
+sudo apt install mysql-server
+```
 
-- 创建私钥
+- 首次登录MySQL，如果安装时没有设置密码，查看 /etc/mysql/debian.cnf，获取password
 
-  ```
-  openssl genrsa -des3 -out server.key 2048
-  ```
+```
+sudo cat /etc/mysql/debian.cnf
+mysql -u debian-sys-maint -p
+```
 
-- 创建签名请求证书CSR
+- 修改root用户的密码
 
-  ```
-  openssl req -new -key server.key -out server.csr
-  ```
+```
+# 新版
+update mysql.user set authentication_string = 'yourPassword' where user = 'root';  
+# 旧版
+update mysql.user set password=password('yourPassword')  where user='root';
+```
 
-- 在加载SSL支持的Nginx并使用上述私钥时除去必须的口令
+- 创建用户，授权；创建数据库要设置字符集为utf8
 
-  ```
-  cp server.key server.key.org
-  openssl rsa -in server.key.org -out server.key
-  ```
+```
+CREATE USER 'username'@'host' IDENTIFIED BY 'yourPassword';
+GRANT ALL ON *.* to 'username'@'host';
+CREATE DATABASE databaseName default character set = 'utf8';
+```
 
-- 标记证书使用上述私钥和CSR
+- 修改my.cnf
 
-  ```
-  openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-  ```
+```
+# ...文件原内容
+
+# my.cnf
+
+[client]
+database = databaseName
+user = userName
+password = userPassword
+host = hostName  # 默认localhost可不填
+port = 3306  # 默认3306可不填
+default-character-set = utf8
+
+!include ... # 文件原内容
+!include ... # 文件原内容
+```
+
+```
+# 总共修改3个MySQL配置文件
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+
+[mysqld]
+character-set-server=utf8
+```
+
+*mysql字符集命令
+
+```
+show variables like 'char%';  # 当前MYSQL服务器字符集设置
+ALTER DATABASE databaseName DEFAULT CHARACTER SET 'utf8';  #更改
+```
+
+
+
+### 9. Django
+
+- 更改django的settings.py
+
+```
+cp sample_settings.py settings.py
+cp sample_urls.py urls.py
+```
+
+- 生成django项目密钥
+
+```
+# 运行python
+from django.core.management import utils
+SECRET_KEY = utils.get_random_secret_key()
+
+# 通过此函数得到密钥后，将密钥复制到settings.py中的
+SECRET_KEY = ''
+```
+
+- 生产环境配置
+
+```
+DEBUG = False
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['EXAMPLE.COM']  # ???
+```
+
+- MySQL连接，不明文保存密码
+
+```
+import pymysql
+
+pymysql.install_as_MySQLdb()
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS':{
+            'read_default_file': '/etc/mysql/my.cnf' # my.cnf就是上一步修改的文件
+        },
+    }
+}
+```
+
+- 静态文件
+
+```
+# settings.py
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+    
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+
+# urls.py
+
+from django.conf.urls.static import static
+from django.conf import settings
+# from django.conf.urls import url
+# from django.views import static
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # url(r'^static/(?P<path>.*)$', static.serve,
+    #     {'document_root': settings.STATIC_ROOT}, name='static')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+- 404 & 500
+
+```
+# urls.py
+
+handler404 = 'gate.views.page_not_found'
+handler500 = 'gate.views.page_error'
+```
+
+**migrate**
+
+- 将django项目中的数据库设计导入MySQL
+
+```
+python manage.py makemigrations (app)
+python manage.py migrate
+```
+
+*此时可以测试运行项目，浏览器打开127.0.0.1:8000
+
+```
+python manage.py runserver
+```
+
+*可能会出现MySQL错误
+
+```
+vim /home/userName/.local/lib/python3.x/sites-packages/django/db/backends/mysql/base.py
+
+# 将这两行注释掉
+
+if version < (1, 3, 13):
+    raise ImproperlyConfigured('mysqlclient 1.3.13 or newer is required; you have %s.' % Database.__version__)
+```
 
 
 
@@ -545,6 +547,3 @@ sudo systemctl start | stop | restart nginx
 ```
 python manage.py collectstatic
 ```
-
-
-
