@@ -9,7 +9,7 @@ django-simple-captcha==0.5.12
 django-tinymce==3.0.2
 django-werkzeug-debugger-runserver==0.3.1
 idna==2.9
-Pillow==7.1.2
+Pillow==9.0.1
 pycparser==2.20
 PyMySQL==0.9.3
 pyOpenSSL==19.1.0
